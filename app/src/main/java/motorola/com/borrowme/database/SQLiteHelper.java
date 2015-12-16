@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import motorola.com.borrowme.database.dao.CollectionDAO;
+import motorola.com.borrowme.database.dao.ItemsDAO;
 
 /**
  * Created by Caio on 15/12/2015.
@@ -36,6 +37,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         try {
             db.execSQL(CollectionDAO.TB_COLLECTION_CREATE);
+            db.execSQL(ItemsDAO.TB_ITEMS_CREATE);
         }
         catch (SQLiteException e){
 

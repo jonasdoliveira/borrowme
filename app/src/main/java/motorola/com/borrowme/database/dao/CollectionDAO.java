@@ -22,7 +22,7 @@ public class CollectionDAO {
 
     public static final String TB_COLLECTION_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     COLUMN_NAME + " TEXT NOT NULL UNIQUE);";
 
     public static final String TB_COLLECTION_DELETE = "DROP TABLE IF EXISTS " + TABLE_NAME;
