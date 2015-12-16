@@ -10,8 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import motorola.com.borrowme.database.entities.CollectionEntity;
+
 public class MainActivity extends Activity {
     ListView listView ;
+
+    ArrayList<CollectionEntity> collectionEntityArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +27,18 @@ public class MainActivity extends Activity {
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.collections);
 
-        // Defined Array values to show in ListView
-        String[] values = new String[] { "Collection 1",
-                "Collection 2",
-                "Collection 3",
-        };
+        collectionEntityArrayList = new ArrayList<>();
+
+        //TODO: collection de teste, pegar do banco;
+        collectionEntityArrayList.add(new CollectionEntity(0, "Colecao 1"));
+        collectionEntityArrayList.add(new CollectionEntity(1, "Colecao 2"));
 
         // Define a new Adapter
         // First parameter - Context
         // Second parameter - Layout for the row
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        ArrayAdapter<CollectionEntity> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, collectionEntityArrayList);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
