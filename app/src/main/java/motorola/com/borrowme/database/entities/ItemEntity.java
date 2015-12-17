@@ -17,6 +17,12 @@ public class ItemEntity {
         this.code = code;
     }
 
+    public ItemEntity(String name, String description, String code) {
+        this.name = name;
+        this.description = description;
+        this.code = code;
+    }
+
     public ItemEntity() {}
 
     public long get_id() {
@@ -49,5 +55,10 @@ public class ItemEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
