@@ -1,6 +1,7 @@
 package motorola.com.borrowme;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +12,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import motorola.com.borrowme.database.dao.CollectionDAO;
 import motorola.com.borrowme.database.entities.CollectionEntity;
 
-public class MainActivity extends Activity {
-    ListView listView ;
-
+public class MainActivity extends Activity implements DFragment.InsertCallback {
+    ListView listView;
+    FragmentManager fm = getFragmentManager();
+    CollectionDAO colDAO;
+    ArrayAdapter<CollectionEntity> adapter;
     ArrayList<CollectionEntity> collectionEntityArrayList;
 
     @Override
@@ -27,22 +32,6 @@ public class MainActivity extends Activity {
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.collections);
 
-        collectionEntityArrayList = new ArrayList<>();
-
-        //TODO: collection de teste, pegar do banco;
-        collectionEntityArrayList.add(new CollectionEntity(0, "Colecao 1"));
-        collectionEntityArrayList.add(new CollectionEntity(1, "Colecao 2"));
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-        ArrayAdapter<CollectionEntity> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, collectionEntityArrayList);
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
         // ListView Item Click Listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,13 +39,20 @@ public class MainActivity extends Activity {
                 // ListView Clicked item index
                 int itemPosition     = position;
                 // ListView Clicked item value
-                String  itemValue    = (String) listView.getItemAtPosition(position);
+                String  itemValue    = listView.getItemAtPosition(position).toString();
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
                         "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
                         .show();
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        collectionCreated();
     }
 
     @Override
@@ -75,9 +71,21 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_collection) {
+            DFragment dFragment = new DFragment();
+            // Show DialogFragment
+            dFragment.show(fm, "Dialog Fragment");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void collectionCreated() {
+        colDAO = CollectionDAO.getInstance(MainActivity.this);
+        collectionEntityArrayList = new ArrayList<>(colDAO.selectAll());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, collectionEntityArrayList);
+        // Assign adapter to ListView
+        listView.setAdapter(adapter);
     }
 }
