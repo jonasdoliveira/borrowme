@@ -40,7 +40,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             db.execSQL(ItemsDAO.TB_ITEMS_CREATE);
         }
         catch (SQLiteException e){
-
+            
         }
 
 

@@ -2,6 +2,7 @@ package motorola.com.borrowme;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,14 +37,11 @@ public class MainActivity extends Activity implements DFragment.InsertCallback {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // ListView Clicked item index
-                int itemPosition     = position;
-                // ListView Clicked item value
-                String  itemValue    = listView.getItemAtPosition(position).toString();
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
+                Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
+
+                intent.putExtra(ItemsActivity.COLLECTION_KEY, (int)collectionEntityArrayList.get(position).get_id());
+                startActivity(intent);
+
             }
         });
 

@@ -24,6 +24,8 @@ import motorola.com.borrowme.database.entities.ItemEntity;
 
 public class ItemsActivity extends Activity {
 
+    public static final String COLLECTION_KEY = "COLLECTION";
+
     private ListView lvItems;
 
 
