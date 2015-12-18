@@ -71,7 +71,7 @@ public class ViewItemActivity extends Activity {
         viewDescription.setText(itemEntity.getDescription());
         viewCode.setText(itemEntity.getCode());
 
-        if(itemEntity.getPersonId() != -1) {
+        if(itemEntity.getPersonId() != 0) {
             personEntity = personDAO.selectById(itemEntity.getPersonId());
             contentPerson.setText(personEntity.getName());
             contentPhone.setText(personEntity.getPhone());
@@ -108,7 +108,7 @@ public class ViewItemActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_item, menu);
+        getMenuInflater().inflate(R.menu.menu_view, menu);
         return true;
     }
 
@@ -120,7 +120,9 @@ public class ViewItemActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete_item) {
+            itemsDAO.delete(itemEntity);
+            finish();
             return true;
         }
 

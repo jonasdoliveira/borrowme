@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="motorola.com.borrowme.AddItemActivity">
+
+    <item android:id="@+id/action_delete_item"
+          android:title="@string/delete_item"
+          android:orderInCategory="100"
+          android:showAsAction="never"
+          android:icon="@android:drawable/ic_menu_delete"/>
+</menu>
