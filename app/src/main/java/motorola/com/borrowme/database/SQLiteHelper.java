@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import motorola.com.borrowme.database.dao.CollectionDAO;
 import motorola.com.borrowme.database.dao.ItemsDAO;
+import motorola.com.borrowme.database.dao.PersonDAO;
 
 /**
  * Created by Caio on 15/12/2015.
@@ -38,6 +39,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(CollectionDAO.TB_COLLECTION_CREATE);
             db.execSQL(ItemsDAO.TB_ITEMS_CREATE);
+            db.execSQL(PersonDAO.TB_PERSONS_CREATE);
         }
         catch (SQLiteException e){
             
