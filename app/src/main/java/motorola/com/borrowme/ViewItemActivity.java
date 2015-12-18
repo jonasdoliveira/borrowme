@@ -1,6 +1,7 @@
 package motorola.com.borrowme;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.Menu;
@@ -17,6 +18,8 @@ import motorola.com.borrowme.database.entities.ItemEntity;
 import motorola.com.borrowme.database.entities.PersonEntity;
 
 public class ViewItemActivity extends Activity {
+
+    public static final String ITEM_ID_KEY = "ITEM_ID";
 
     long itemID;
 
@@ -41,6 +44,7 @@ public class ViewItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
+        itemID = getIntent().getLongExtra(ITEM_ID_KEY, 0);
 
         itemsDAO = ItemsDAO.getInstance(this);
         personDAO = PersonDAO.getInstance(this);
@@ -60,30 +64,33 @@ public class ViewItemActivity extends Activity {
         whenBorrowed = findViewById(R.id.view_when_borrowed);
         whenNotBorrowed = findViewById(R.id.view_when_not_borrowed);
 
-        itemID = getIntent().getLongExtra("ITEM_ID", 0);
-        if(itemID != 0){
-            itemEntity = itemsDAO.selectById(itemID);
-            viewName.setText(itemEntity.getName());
-            viewDescription.setText(itemEntity.getDescription());
-            viewCode.setText(itemEntity.getCode());
 
-            if(itemEntity.getPersonId() != -1) {
-                personEntity = personDAO.selectById(itemEntity.getPersonId());
-                contentPerson.setText(personEntity.getName());
-                contentPhone.setText(personEntity.getPhone());
-                contentEmail.setText(personEntity.getEmail());
-                whenBorrowed.setVisibility(View.VISIBLE);
-                whenNotBorrowed.setVisibility(View.GONE);
-            } else {
-                whenBorrowed.setVisibility(View.GONE);
-                whenNotBorrowed.setVisibility(View.VISIBLE);
-            }
+        itemEntity = itemsDAO.selectById(itemID);
+
+        viewName.setText(itemEntity.getName());
+        viewDescription.setText(itemEntity.getDescription());
+        viewCode.setText(itemEntity.getCode());
+
+        if(itemEntity.getPersonId() != -1) {
+            personEntity = personDAO.selectById(itemEntity.getPersonId());
+            contentPerson.setText(personEntity.getName());
+            contentPhone.setText(personEntity.getPhone());
+            contentEmail.setText(personEntity.getEmail());
+            whenBorrowed.setVisibility(View.VISIBLE);
+            whenNotBorrowed.setVisibility(View.GONE);
+        } else {
+            whenBorrowed.setVisibility(View.GONE);
+            whenNotBorrowed.setVisibility(View.VISIBLE);
         }
+
 
         btnBorrowItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: TRANSITION TO PEOPLE ACTIVITY
+                Intent i = new Intent(ViewItemActivity.this, PersonsActivity.class);
+                i.putExtra(PersonsActivity.ITEM_KEY, itemID);
+                startActivity(i);
             }
         });
 

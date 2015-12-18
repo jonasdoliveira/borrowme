@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import motorola.com.borrowme.database.dao.ItemsDAO;
 import motorola.com.borrowme.database.dao.PersonDAO;
+import motorola.com.borrowme.database.entities.ItemEntity;
 import motorola.com.borrowme.database.entities.PersonEntity;
 
 public class PersonsActivity extends Activity {
@@ -46,8 +47,11 @@ public class PersonsActivity extends Activity {
         lvPersons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //TODO: editar o item no banco pra add a pessoa
+                
+                ItemEntity itemEntity = ItemsDAO.getInstance(PersonsActivity.this).selectById(itemId);
+                itemEntity.setPersonId(personsList.get(position).get_id());
+                ItemsDAO.getInstance(PersonsActivity.this).update(itemEntity);
+                finish();
             }
         });
     }

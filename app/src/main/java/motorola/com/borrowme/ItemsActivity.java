@@ -43,7 +43,7 @@ public class ItemsActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), ViewItemActivity.class);
-                i.putExtra("ITEM_ID", itemsAdapter.getItem(position).get_id());
+                i.putExtra(ViewItemActivity.ITEM_ID_KEY, itemsAdapter.getItem(position).get_id());
                 startActivity(i);
             }
         });

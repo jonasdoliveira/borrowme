@@ -62,8 +62,11 @@ public class ItemsDAO {
     }
 
     public ItemEntity selectById(long id) {
-        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " where " + COLUMN_ID + " = " + id;
-        Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
+        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " where " + COLUMN_ID + " = ? ";
+
+        String[] params = {String.valueOf(id)};
+
+        Cursor cursor = dataBase.rawQuery(queryReturnAll, params);
         ItemEntity itemEntity = generateItemsEntityByCursor(cursor);
 
         return itemEntity;
