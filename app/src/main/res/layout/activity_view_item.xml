@@ -53,12 +53,12 @@
 
 
     <LinearLayout
-        android:id="@+id/when_not_borrowed"
+        android:id="@+id/view_when_not_borrowed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/btn_borrow_item"
@@ -69,13 +69,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/when_borrowed"
+        android:id="@+id/view_when_borrowed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
             android:text="Contact Name" />
 
         <TextView
-            android:id="@+id/view_name"
+            android:id="@+id/content_person"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -108,7 +108,7 @@
             android:text="Phone Number" />
 
         <TextView
-            android:id="@+id/view_description"
+            android:id="@+id/content_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -123,7 +123,7 @@
             android:text="E-mail Address" />
 
         <TextView
-            android:id="@+id/view_code"
+            android:id="@+id/content_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
