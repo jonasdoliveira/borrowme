@@ -44,6 +44,7 @@ public class AddItemActivity extends Activity {
             @Override
             public void onClick(View v) {
                 ItemEntity itemEntity = new ItemEntity(
+                        0000000001, //TODO: GET THIS FROM CONTEXT
                         edtName.getText().toString(),
                         edtDescription.getText().toString(),
                         edtCode.getText().toString());

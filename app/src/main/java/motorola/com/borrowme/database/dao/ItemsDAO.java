@@ -18,6 +18,7 @@ public class ItemsDAO {
 
     public static final String TABLE_NAME = "items";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_COLLECTION_ID = "collection_id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_CODE = "code";
@@ -25,6 +26,7 @@ public class ItemsDAO {
     public static final String TB_ITEMS_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    COLUMN_COLLECTION_ID + " INTEGER, " +
                     COLUMN_NAME + " TEXT NOT NULL, " +
                     COLUMN_DESCRIPTION + " TEXT, " +
                     COLUMN_CODE + " TEXT UNIQUE);";
@@ -65,6 +67,13 @@ public class ItemsDAO {
         return itemEntity;
     }
 
+    public List<ItemEntity> selectByCollection (long id) {
+        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " where " + COLUMN_COLLECTION_ID + " = " + id;
+        Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
+
+        return generateItemsByCursor(cursor);
+    }
+
     public int delete(ItemEntity item) {
 
         String[] valuesForDelete = {
@@ -102,16 +111,18 @@ public class ItemsDAO {
             if (cursor.moveToFirst()) {
 
                 int indexID = cursor.getColumnIndex(COLUMN_ID);
+                int indexCollectionID = cursor.getColumnIndex(COLUMN_COLLECTION_ID);
                 int indexItemName = cursor.getColumnIndex(COLUMN_NAME);
                 int indexItemDescription = cursor.getColumnIndex(COLUMN_DESCRIPTION);
                 int indexItemCode = cursor.getColumnIndex(COLUMN_CODE);
 
                 long id = cursor.getLong(indexID);
+                long collectionId = cursor.getLong(indexCollectionID);
                 String name = cursor.getString(indexItemName);
                 String description = cursor.getString(indexItemDescription);
                 String code = cursor.getString(indexItemCode);
 
-                itemEntity = new ItemEntity(id, name, description, code);
+                itemEntity = new ItemEntity(id, collectionId, name, description, code);
             }
 
         } finally {

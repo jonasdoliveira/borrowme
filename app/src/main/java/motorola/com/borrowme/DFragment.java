@@ -51,7 +51,9 @@ public class DFragment extends DialogFragment{
         AlertDialog.Builder ok = builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 CollectionEntity new_collection = new CollectionEntity(edtDialogText.getText().toString());
-                CollectionDAO.getInstance(getActivity()).insert(new_collection);
+                if (!edtDialogText.getText().toString().equals("")) {
+                    CollectionDAO.getInstance(getActivity()).insert(new_collection);
+                }
                 clbk.collectionCreated();
             }
         });

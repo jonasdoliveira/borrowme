@@ -6,24 +6,35 @@ package motorola.com.borrowme.database.entities;
 public class ItemEntity {
 
     private long _id;
+    private long collectionId;
     private String name;
     private String description;
     private String code;
 
-    public ItemEntity(long _id, String name, String description, String code) {
+    public ItemEntity(long _id, long collectionId, String name, String description, String code) {
         this._id = _id;
+        this.collectionId = collectionId;
         this.name = name;
         this.description = description;
         this.code = code;
     }
 
-    public ItemEntity(String name, String description, String code) {
+    public ItemEntity(long collectionId, String name, String description, String code) {
+        this.collectionId = collectionId;
         this.name = name;
         this.description = description;
         this.code = code;
     }
 
     public ItemEntity() {}
+
+    public long getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(long collectionId) {
+        this.collectionId = collectionId;
+    }
 
     public long get_id() {
         return _id;
