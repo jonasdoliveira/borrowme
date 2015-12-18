@@ -14,11 +14,15 @@
     <string name="dialog_save">Save</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="action_add_person">Add Person</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="btn_save_item">Save</string>
     <string name="btn_borrow">Borrow</string>
     <string name="btn_return">Return</string>
+    <string name="title_activity_add_person">AddPersonActivity</string>
+    <string name="title_activity_person">PersonsActivity</string>
 
 
 

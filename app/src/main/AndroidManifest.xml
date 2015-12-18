@@ -12,6 +12,7 @@
             android:label="@string/collection_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,6 +23,14 @@
         <activity
             android:name=".AddItemActivity"
             android:label="@string/title_activity_add_item" >
+        </activity>
+        <activity
+            android:name=".AddPersonActivity"
+            android:label="@string/title_activity_add_person" >
+        </activity>
+        <activity
+            android:name=".PersonsActivity"
+            android:label="@string/title_activity_person" >
         </activity>
     </application>
 
