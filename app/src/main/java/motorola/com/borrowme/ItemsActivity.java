@@ -19,6 +19,8 @@ public class ItemsActivity extends Activity {
 
     public static final String COLLECTION_KEY = "COLLECTION";
 
+    long currentCollectionId;
+
     private ListView lvItems;
 
 
@@ -31,15 +33,11 @@ public class ItemsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
 
-        itemsDAO = ItemsDAO.getInstance(this);
-
         lvItems = (ListView) findViewById(R.id.lv_items);
 
-        itemsAdapter = new ArrayAdapter<ItemEntity>(this, android.R.layout.simple_list_item_1,
-                android.R.id.text1, itemsList);
+        currentCollectionId = getIntent().getLongExtra(COLLECTION_KEY, 0);
 
-        itemsAdapter.addAll(itemsDAO.selectAll());
-        lvItems.setAdapter(itemsAdapter);
+        itemsDAO = ItemsDAO.getInstance(this);
 
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,6 +61,7 @@ public class ItemsActivity extends Activity {
 
         if (id == R.id.action_new_item) {
             Intent i = new Intent(this, AddItemActivity.class);
+            i.putExtra(AddItemActivity.COLLECTION_KEY, currentCollectionId);
             startActivity(i);
         }
 
@@ -71,10 +70,14 @@ public class ItemsActivity extends Activity {
 
     @Override
     protected void onResume() {
-        itemsList = new ArrayList<>(itemsDAO.selectAll());
 
-        itemsAdapter.clear();
-        itemsAdapter.addAll(itemsDAO.selectAll());
+        itemsList = new ArrayList<>(itemsDAO.selectByCollection(currentCollectionId));
+
+        itemsAdapter = new ArrayAdapter<ItemEntity>(this, android.R.layout.simple_list_item_1,
+                android.R.id.text1, itemsList);
+
+        lvItems.setAdapter(itemsAdapter);
+
         itemsAdapter.notifyDataSetChanged();
 
         super.onResume();

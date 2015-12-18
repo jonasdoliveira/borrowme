@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements DFragment.InsertCallback {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
 
-                intent.putExtra(ItemsActivity.COLLECTION_KEY, (int)collectionEntityArrayList.get(position).get_id());
+                intent.putExtra(ItemsActivity.COLLECTION_KEY, collectionEntityArrayList.get(position).get_id());
                 startActivity(intent);
 
             }

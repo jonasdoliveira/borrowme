@@ -13,6 +13,8 @@ import motorola.com.borrowme.database.entities.ItemEntity;
 
 public class AddItemActivity extends Activity {
 
+    public static final String COLLECTION_KEY = "COLLECTION";
+
     private Button btnSaveItem;
     private EditText edtName;
     private EditText edtDescription;
@@ -20,10 +22,14 @@ public class AddItemActivity extends Activity {
 
     private ItemsDAO itemsDAO;
 
+    private long collectionId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        collectionId = getIntent().getLongExtra(COLLECTION_KEY, 0);
 
         itemsDAO = ItemsDAO.getInstance(this);
 
@@ -33,6 +39,7 @@ public class AddItemActivity extends Activity {
         btnSaveItem = (Button) findViewById(R.id.btn_save_item);
 
         long itemID = getIntent().getLongExtra("ITEM_ID", 0);
+
         if(itemID != 0){
             ItemEntity itemEntity = itemsDAO.selectById(itemID);
             edtName.setText(itemEntity.getName());
@@ -44,7 +51,7 @@ public class AddItemActivity extends Activity {
             @Override
             public void onClick(View v) {
                 ItemEntity itemEntity = new ItemEntity(
-                        0000000001, //TODO: GET THIS FROM CONTEXT
+                        collectionId,
                         edtName.getText().toString(),
                         edtDescription.getText().toString(),
                         edtCode.getText().toString());

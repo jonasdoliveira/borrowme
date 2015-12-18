@@ -68,8 +68,11 @@ public class ItemsDAO {
     }
 
     public List<ItemEntity> selectByCollection (long id) {
-        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " where " + COLUMN_COLLECTION_ID + " = " + id;
-        Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
+        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " where " + COLUMN_COLLECTION_ID + " =  ? ";
+
+        String[] params = {String.valueOf(id)};
+
+        Cursor cursor = dataBase.rawQuery(queryReturnAll, params);
 
         return generateItemsByCursor(cursor);
     }
@@ -178,6 +181,7 @@ public class ItemsDAO {
     private ContentValues generateItemValues(ItemEntity item) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, item.getName());
+        values.put(COLUMN_COLLECTION_ID, item.getCollectionId());
         values.put(COLUMN_DESCRIPTION, item.getDescription());
         values.put(COLUMN_CODE, item.getCode());
 
