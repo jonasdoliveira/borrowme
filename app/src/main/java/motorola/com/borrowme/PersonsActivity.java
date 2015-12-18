@@ -38,6 +38,8 @@ public class PersonsActivity extends Activity {
 
         lvPersons = (ListView) findViewById(R.id.lv_persons);
 
+        itemId = getIntent().getLongExtra(PersonsActivity.ITEM_KEY, 0);
+
         personsAdapter = new ArrayAdapter<PersonEntity>(this, android.R.layout.simple_list_item_1,
                 android.R.id.text1, personsList);
 
