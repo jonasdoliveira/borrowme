@@ -54,7 +54,8 @@ public class AddItemActivity extends Activity {
                         collectionId,
                         edtName.getText().toString(),
                         edtDescription.getText().toString(),
-                        edtCode.getText().toString());
+                        edtCode.getText().toString(),
+                        -1);
 
                 itemsDAO.insert(itemEntity);
                 finish();

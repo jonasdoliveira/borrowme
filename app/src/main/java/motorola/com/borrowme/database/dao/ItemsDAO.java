@@ -22,6 +22,7 @@ public class ItemsDAO {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_CODE = "code";
+    public static final String COLUMN_PERSON_ID = "person_id";
 
     public static final String TB_ITEMS_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -29,7 +30,8 @@ public class ItemsDAO {
                     COLUMN_COLLECTION_ID + " INTEGER, " +
                     COLUMN_NAME + " TEXT NOT NULL, " +
                     COLUMN_DESCRIPTION + " TEXT, " +
-                    COLUMN_CODE + " TEXT UNIQUE);";
+                    COLUMN_CODE + " TEXT UNIQUE, " +
+                    COLUMN_PERSON_ID + " INTEGER);";
 
     public static final String TB_ITEMS_DELETE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
@@ -118,14 +120,16 @@ public class ItemsDAO {
                 int indexItemName = cursor.getColumnIndex(COLUMN_NAME);
                 int indexItemDescription = cursor.getColumnIndex(COLUMN_DESCRIPTION);
                 int indexItemCode = cursor.getColumnIndex(COLUMN_CODE);
+                int indexPersonID = cursor.getColumnIndex(COLUMN_PERSON_ID);
 
                 long id = cursor.getLong(indexID);
                 long collectionId = cursor.getLong(indexCollectionID);
                 String name = cursor.getString(indexItemName);
                 String description = cursor.getString(indexItemDescription);
                 String code = cursor.getString(indexItemCode);
+                long personID = cursor.getLong(indexPersonID);
 
-                itemEntity = new ItemEntity(id, collectionId, name, description, code);
+                itemEntity = new ItemEntity(id, collectionId, name, description, code, personID);
             }
 
         } finally {
@@ -151,17 +155,20 @@ public class ItemsDAO {
                 do {
 
                     int indexID = cursor.getColumnIndex(COLUMN_ID);
+                    int indexCollectionID = cursor.getColumnIndex(COLUMN_COLLECTION_ID);
                     int indexItemName = cursor.getColumnIndex(COLUMN_NAME);
                     int indexItemDescription = cursor.getColumnIndex(COLUMN_DESCRIPTION);
                     int indexItemCode = cursor.getColumnIndex(COLUMN_CODE);
+                    int indexPersonID = cursor.getColumnIndex(COLUMN_PERSON_ID);
 
                     long id = cursor.getLong(indexID);
+                    long collectionId = cursor.getLong(indexCollectionID);
                     String name = cursor.getString(indexItemName);
                     String description = cursor.getString(indexItemDescription);
                     String code = cursor.getString(indexItemCode);
+                    long personID = cursor.getLong(indexPersonID);
 
-                    itemEntity = new ItemEntity(id, name, description, code);
-
+                    itemEntity = new ItemEntity(id, collectionId, name, description, code, personID);
                     itemEntityList.add(itemEntity);
 
                 } while (cursor.moveToNext());

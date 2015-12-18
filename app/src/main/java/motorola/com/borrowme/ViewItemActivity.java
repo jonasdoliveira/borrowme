@@ -48,7 +48,8 @@ public class ViewItemActivity extends Activity {
                         0000000001, //TODO: GET THIS FROM CONTEXT
                         viewName.getText().toString(),
                         viewDescription.getText().toString(),
-                        viewCode.getText().toString());
+                        viewCode.getText().toString(),
+                        -1);
 
                 itemsDAO.insert(itemEntity);
                 finish();

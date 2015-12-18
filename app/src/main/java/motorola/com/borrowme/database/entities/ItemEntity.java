@@ -10,20 +10,31 @@ public class ItemEntity {
     private String name;
     private String description;
     private String code;
+    private long personId;
 
-    public ItemEntity(long _id, long collectionId, String name, String description, String code) {
+    public ItemEntity(long _id, long collectionId, String name, String description, String code, long personId) {
         this._id = _id;
         this.collectionId = collectionId;
         this.name = name;
         this.description = description;
         this.code = code;
+        this.personId = personId;
     }
 
-    public ItemEntity(long collectionId, String name, String description, String code) {
+    public ItemEntity(long collectionId, String name, String description, String code, long personId) {
         this.collectionId = collectionId;
         this.name = name;
         this.description = description;
         this.code = code;
+        this.personId = personId;
+    }
+
+    public long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(long personId) {
+        this.personId = personId;
     }
 
     public ItemEntity() {}
