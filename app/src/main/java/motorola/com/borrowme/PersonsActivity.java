@@ -18,6 +18,10 @@ import motorola.com.borrowme.database.entities.PersonEntity;
 
 public class PersonsActivity extends Activity {
 
+    public static final String ITEM_KEY = "ITEM";
+
+    long itemId;
+
     private ListView lvPersons;
 
     private ArrayList<PersonEntity> personsList = new ArrayList<>();
@@ -42,9 +46,8 @@ public class PersonsActivity extends Activity {
         lvPersons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               /* Intent i = new Intent(getApplicationContext(), AddItemActivity.class);
-                i.putExtra("ITEM_ID", personsAdapter.getItem(position).get_id());
-                startActivity(i);*/
+
+                //TODO: editar o item no banco pra add a pessoa
             }
         });
     }

@@ -9,10 +9,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/collection_list" >
+            android:label="@string/borrow_me" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,6 +22,10 @@
         <activity
             android:name=".AddItemActivity"
             android:label="@string/title_activity_add_item" >
+        </activity>
+        <activity
+            android:name=".ViewItemActivity"
+            android:label="@string/title_activity_view_item" >
         </activity>
         <activity
             android:name=".AddPersonActivity"

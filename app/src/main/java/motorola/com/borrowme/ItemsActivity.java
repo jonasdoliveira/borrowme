@@ -42,7 +42,7 @@ public class ItemsActivity extends Activity {
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), AddItemActivity.class);
+                Intent i = new Intent(getApplicationContext(), ViewItemActivity.class);
                 i.putExtra("ITEM_ID", itemsAdapter.getItem(position).get_id());
                 startActivity(i);
             }
