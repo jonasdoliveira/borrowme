@@ -17,6 +17,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="btn_save_item">Save</string>
+    <string name="btn_borrow">Borrow</string>
+    <string name="btn_return">Return</string>
+
 
 
 </resources>
